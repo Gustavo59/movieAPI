@@ -8,6 +8,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Optional;
+
 @RestController
 @RequestMapping("/v1/movie")
 @Slf4j
@@ -21,7 +23,7 @@ public class MovieController {
     public ResponseEntity<?> findMovieById(@PathVariable String id){
         log.info("Finding movie by id.... with id:", id);
 
-        Movie movie;
+        Optional<Movie> movie;
 
         try{
             movie = service.findMovieById(id);

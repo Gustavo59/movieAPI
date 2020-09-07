@@ -28,11 +28,11 @@ public class MovieRequest {
     private String budget;
 
     @NotNull
-    private Date releaseDate;
+    private String releaseDate;
 
     @NotNull
     private String revenue;
 
     @NotNull
-    private List<?> genres;
+    private String genres;
 }

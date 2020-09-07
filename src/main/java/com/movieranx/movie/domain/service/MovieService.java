@@ -6,7 +6,10 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.text.MessageFormat;
+import java.util.ArrayList;
 import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
@@ -27,5 +30,20 @@ public class MovieService {
         }
 
         return movie;
+    }
+
+
+    public ArrayList<Movie> findTopMoviesByGenre(String genre){
+        ArrayList<Movie> movies = null;
+
+        try{
+            movies = repository.findFirst10ByGenresRegexOrderByRevenueDesc(genre);
+        } catch(Exception e){
+            log.error("Cold not find movie by genre");
+            log.error(e.getMessage());
+            throw e;
+        }
+
+        return movies;
     }
 }

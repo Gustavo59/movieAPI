@@ -6,6 +6,8 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 @Slf4j
 public class MovieService {
@@ -13,8 +15,8 @@ public class MovieService {
     @Autowired
     MovieRepository repository;
 
-    public Movie findMovieById(String id){
-        Movie movie = null;
+    public Optional<Movie> findMovieById(String id){
+        Optional<Movie> movie = null;
 
         try{
             movie = repository.findById(id);

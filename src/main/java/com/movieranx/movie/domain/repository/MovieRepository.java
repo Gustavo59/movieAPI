@@ -7,9 +7,5 @@ import org.springframework.stereotype.Repository;
 @Repository
 public interface MovieRepository extends MongoRepository<Movie, String> {
 
-    /*
-    Param id
-    Return specific movie by his id
-     */
-    Movie findById(String id);
+
 }

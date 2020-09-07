@@ -19,7 +19,7 @@ public class MovieController {
     @CrossOrigin("*")
     @GetMapping("/findbyid/{id}")
     public ResponseEntity<?> findMovieById(@PathVariable String id){
-        log.info("Finding movie by id....");
+        log.info("Finding movie by id.... with id:", id);
 
         Movie movie;
 
@@ -32,7 +32,7 @@ public class MovieController {
         }
 
         if(movie == null){
-            return new ResponseEntity<>("Could not fund movie", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not found movie", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(movie, HttpStatus.OK);

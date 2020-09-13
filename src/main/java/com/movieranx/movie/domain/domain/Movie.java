@@ -27,13 +27,11 @@ public class Movie implements Serializable {
     @NotNull
     private String original_title;
 
-    @NotNull
     private String budget;
 
     @NotNull
     private String release_date;
 
-    @NotNull
     private String revenue;
 
     @NotNull
@@ -42,6 +40,5 @@ public class Movie implements Serializable {
     @NotNull
     private String poster_path;
 
-    @NotNull
     private ArrayList<?> genres;
 }

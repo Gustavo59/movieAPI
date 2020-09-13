@@ -1,21 +1,24 @@
 package com.movieranx.movie.domain.service;
 
+import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.movieranx.movie.domain.domain.Movie;
 import com.movieranx.movie.domain.repository.MovieRepository;
 import lombok.extern.slf4j.Slf4j;
+import org.json.JSONArray;
+import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.LinkedHashMap;
+import java.io.DataInput;
+import java.io.IOException;
+import java.util.*;
 import java.util.stream.Collectors;
 import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.Optional;
 import java.util.concurrent.ExecutionException;
 
 @Service
@@ -39,8 +42,10 @@ public class MovieService {
         return movie;
     }
 
-    public ArrayList<Movie> findMovieByName(String name){
+    public ArrayList<Movie> findMovieByName(String name) {
         ArrayList<Movie> movies = null;
+
+        ObjectMapper mapper = new ObjectMapper();
 
         try{
             LinkedHashMap Movies = repository.getMovieByName(name);

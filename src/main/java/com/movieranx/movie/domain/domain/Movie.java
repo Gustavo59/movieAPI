@@ -9,6 +9,8 @@ import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -16,24 +18,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "Movie")
-public class Movie {
+//@Document(collection = "Movie")
+public class Movie implements Serializable {
 
     @Id
     private String id;
 
     @NotNull
-    private String title;
+    private String original_title;
 
     @NotNull
     private String budget;
 
     @NotNull
-    private String releaseDate;
+    private String release_date;
 
     @NotNull
     private String revenue;
 
     @NotNull
-    private String genres;
+    private String overview;
+
+    @NotNull
+    private String poster_path;
+
+    @NotNull
+    private ArrayList<?> genres;
 }

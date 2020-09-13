@@ -8,6 +8,7 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -15,24 +16,30 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Builder
-@Document(collection = "Movie")
-public class MovieRequest {
+//@Document(collection = "Movie")
+public class MovieRequest implements Serializable {
 
-    @Id
+    //@Id
     private String id;
 
-    @NotNull
-    private String title;
+    //@NotNull
+    private String original_title;
 
-    @NotNull
+    //@NotNull
     private String budget;
 
-    @NotNull
-    private String releaseDate;
+    //@NotNull
+    private String release_date;
 
-    @NotNull
+    //@NotNull
     private String revenue;
 
-    @NotNull
-    private String genres;
+    //@NotNull
+    private String overview;
+
+    //@NotNull
+    private String poster_path;
+
+    //@NotNull
+    //private String genres;
 }

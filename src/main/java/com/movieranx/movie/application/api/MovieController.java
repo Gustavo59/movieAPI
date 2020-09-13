@@ -8,6 +8,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.Optional;
 
 @RestController
@@ -23,7 +24,7 @@ public class MovieController {
     public ResponseEntity<?> findMovieById(@PathVariable String id){
         log.info("Finding movie by id....");
 
-        Optional<Movie> movie;
+        Movie movie;
 
         try{
             movie = service.findMovieById(id);
@@ -34,9 +35,31 @@ public class MovieController {
         }
 
         if(movie == null){
-            return new ResponseEntity<>("Could not fund movie", HttpStatus.NOT_FOUND);
+            return new ResponseEntity<>("Could not found movie", HttpStatus.NOT_FOUND);
         }
 
         return new ResponseEntity<>(movie, HttpStatus.OK);
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/findbyname/{name}")
+    public ResponseEntity<?> findMovieByName(@PathVariable String name){
+        log.info("Finding movie by name....");
+
+        ArrayList<Movie> movies;
+
+        try{
+            movies = service.findMovieByName(name);
+        } catch (Exception e){
+            log.error("Error while finding movie with Name " + name, e.getCause());
+            e.printStackTrace();
+            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+
+        if(movies == null){
+            return new ResponseEntity<>("Could not found movie", HttpStatus.NOT_FOUND);
+        }
+
+        return new ResponseEntity<>(movies, HttpStatus.OK);
     }
 }

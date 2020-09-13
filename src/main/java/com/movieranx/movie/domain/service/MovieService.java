@@ -13,6 +13,10 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 import java.util.stream.Collectors;
+import java.text.MessageFormat;
+import java.util.ArrayList;
+import java.util.Optional;
+import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
@@ -40,7 +44,7 @@ public class MovieService {
 
         try{
             LinkedHashMap Movies = repository.getMovieByName(name);
-            ArrayList<Movie> ArrayMovies = (ArrayList<Movie>) teste.get("results");
+            ArrayList<Movie> ArrayMovies = (ArrayList<Movie>) Movies.get("results");
             movies = ArrayMovies;
         } catch (Exception e){
             log.error("Could not find movie!");
@@ -50,4 +54,18 @@ public class MovieService {
 
         return movies;
     }
+
+    /*public ArrayList<Movie> findTopMoviesByGenre(String genre){
+        ArrayList<Movie> movies = null;
+
+        try{
+            movies = repository.findFirst10ByGenresRegexOrderByRevenueDesc(genre);
+        } catch(Exception e){
+            log.error("Cold not find movie by genre");
+            log.error(e.getMessage());
+            throw e;
+        }
+
+        return movies;
+    }*/
 }

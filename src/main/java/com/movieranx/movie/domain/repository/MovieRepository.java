@@ -7,6 +7,8 @@ import org.springframework.web.client.RestTemplate;
 
 import java.util.LinkedHashMap;
 
+import java.util.ArrayList;
+
 @Repository
 public class MovieRepository {
     private final RestTemplate restTemplate;
@@ -25,3 +27,4 @@ public class MovieRepository {
         return this.restTemplate.getForObject(url, LinkedHashMap.class);
     }
 }
+

@@ -45,19 +45,17 @@ public class MovieService {
     public ArrayList<Movie> findMovieByName(String name) {
         ArrayList<Movie> movies = null;
 
-        ObjectMapper mapper = new ObjectMapper();
-
         try{
-            LinkedHashMap Movies = repository.getMovieByName(name);
-            ArrayList<Movie> ArrayMovies = (ArrayList<Movie>) Movies.get("results");
-            movies = ArrayMovies;
+            LinkedHashMap response = repository.getMovieByName(name);
+            if(response.containsKey("results")) {
+                movies = (ArrayList<Movie>) response.get("results");
+            }
+            return movies;
         } catch (Exception e){
             log.error("Could not find movie!");
             log.error(e.getMessage());
             throw e;
         }
-
-        return movies;
     }
 
     /*public ArrayList<Movie> findTopMoviesByGenre(String genre){

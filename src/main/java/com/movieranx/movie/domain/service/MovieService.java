@@ -1,38 +1,26 @@
 package com.movieranx.movie.domain.service;
 
-import com.fasterxml.jackson.core.type.TypeReference;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.fasterxml.jackson.databind.util.JSONPObject;
 import com.movieranx.movie.domain.domain.Movie;
 import com.movieranx.movie.domain.repository.MovieRepository;
+import info.movito.themoviedbapi.model.MovieDb;
 import lombok.extern.slf4j.Slf4j;
-import org.json.JSONArray;
-import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.web.client.RestTemplateBuilder;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
-import java.io.DataInput;
-import java.io.IOException;
 import java.util.*;
-import java.util.stream.Collectors;
-import java.text.MessageFormat;
 import java.util.ArrayList;
-import java.util.concurrent.ExecutionException;
 
 @Service
 @Slf4j
 public class MovieService {
 
     @Autowired
-    MovieRepository repository;
-
+    MovieRepository movieRepository;
     public Movie findMovieById(String id){
         Movie movie = null;
 
         try{
-            movie = repository.getMovieById(id);
+            movie = movieRepository.getMovieById(id);
         } catch (Exception e){
             log.error("Could not find movie!");
             log.error(e.getMessage());
@@ -45,10 +33,8 @@ public class MovieService {
     public ArrayList<Movie> findMovieByName(String name) {
         ArrayList<Movie> movies = null;
 
-        ObjectMapper mapper = new ObjectMapper();
-
         try{
-            LinkedHashMap Movies = repository.getMovieByName(name);
+            LinkedHashMap Movies = movieRepository.getMovieByName(name);
             ArrayList<Movie> ArrayMovies = (ArrayList<Movie>) Movies.get("results");
             movies = ArrayMovies;
         } catch (Exception e){
@@ -58,6 +44,20 @@ public class MovieService {
         }
 
         return movies;
+    }
+
+    public ArrayList<MovieDb> getTopMoviesByGenre(String name) {
+         ArrayList<MovieDb> movies;
+        try {
+            movies = movieRepository.getTopMoviesByGenre(name);
+        } catch (Exception e) {
+            log.error("Could not find genre!");
+            log.error(e.getMessage());
+            throw e;
+        }
+
+        return movies;
+
     }
 
     /*public ArrayList<Movie> findTopMoviesByGenre(String genre){

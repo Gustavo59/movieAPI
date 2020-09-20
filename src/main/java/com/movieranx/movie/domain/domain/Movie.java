@@ -21,6 +21,7 @@ import java.util.List;
 //@Document(collection = "Movie")
 public class Movie implements Serializable {
 
+
     @Id
     private String id;
 

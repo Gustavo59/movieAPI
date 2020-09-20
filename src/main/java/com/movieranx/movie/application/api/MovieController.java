@@ -2,6 +2,7 @@ package com.movieranx.movie.application.api;
 
 import com.movieranx.movie.domain.domain.Movie;
 import com.movieranx.movie.domain.service.MovieService;
+import info.movito.themoviedbapi.model.MovieDb;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -9,7 +10,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
-import java.util.Optional;
 
 @RestController
 @RequestMapping("/v1/movie")
@@ -61,6 +61,14 @@ public class MovieController {
         }
 
         return new ResponseEntity<>(movies, HttpStatus.OK);
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/getTopMoviesByGenre/{name}")
+    public ArrayList<MovieDb> getTopMoviesByGenre(@PathVariable String name){
+        log.info("Finding genre by name....");
+        ArrayList<MovieDb> movies = service.getTopMoviesByGenre(name);
+        return movies;
     }
 
     /*@GetMapping("/findTopByGenre/{genre}")

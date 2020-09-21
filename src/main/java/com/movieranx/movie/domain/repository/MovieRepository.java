@@ -54,5 +54,19 @@ public class MovieRepository {
         }
         return moviesWithGenre;
     }
+
+    public ArrayList<MovieDb> getMoviesByIdList(List<String> moviesId){
+        Discover discover = new Discover();
+        TmdbApi api = new TmdbApi("76f1f87c35d7c82f82a34ca61635e6a4");
+
+        ArrayList<MovieDb> movies = new ArrayList<>();
+
+        for(String id: moviesId){
+            MovieDb movie = api.getMovies().getMovie(Integer.parseInt(id), "en-US");
+            movies.add(movie);
+        }
+
+        return movies;
+    }
 }
 

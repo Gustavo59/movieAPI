@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.ArrayList;
+import java.util.List;
 
 @RestController
 @RequestMapping("/v1/movie")
@@ -71,22 +72,14 @@ public class MovieController {
         return movies;
     }
 
-    /*@GetMapping("/findTopByGenre/{genre}")
-    public ResponseEntity<?> findTopMoviesByGenre(@PathVariable String genre) {
-        log.info("Finding top movies by genre with genre: " + genre);
+    @CrossOrigin("*")
+    @GetMapping("/getwatchedmovies")
+    public ArrayList<MovieDb> getAllWatchedMovies(@RequestParam List<String> movies){
+        log.info("Getting movies");
 
-        ArrayList<Movie> movies;
+        ArrayList<MovieDb> response = service.getMoviesByIdList(movies);
 
-        try {
-            movies = service.findTopMoviesByGenre(genre);
-        } catch (Exception e) {
-            log.error("Error while finding top movies with genre: " + genre);
-            e.printStackTrace();
-            return new ResponseEntity<>(HttpStatus.INTERNAL_SERVER_ERROR);
-        }
-        if (movies == null) {
-            return new ResponseEntity<>("Could not find movies", HttpStatus.NOT_FOUND);
-        }
-        return new ResponseEntity<>(movies, HttpStatus.OK);
-    }*/
+        return response;
+    }
+
 }

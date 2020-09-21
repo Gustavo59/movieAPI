@@ -60,17 +60,17 @@ public class MovieService {
 
     }
 
-    /*public ArrayList<Movie> findTopMoviesByGenre(String genre){
-        ArrayList<Movie> movies = null;
+    public ArrayList<MovieDb> getMoviesByIdList(List<String> moviesId){
+        ArrayList<MovieDb> movies;
 
         try{
-            movies = repository.findFirst10ByGenresRegexOrderByRevenueDesc(genre);
-        } catch(Exception e){
-            log.error("Cold not find movie by genre");
+            movies = movieRepository.getMoviesByIdList(moviesId);
+        }catch (Exception e){
+            log.error("Could not retrive movie list");
             log.error(e.getMessage());
             throw e;
         }
 
         return movies;
-    }*/
+    }
 }

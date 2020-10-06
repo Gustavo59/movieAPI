@@ -82,4 +82,24 @@ public class MovieController {
         return response;
     }
 
+    @CrossOrigin("*")
+    @GetMapping("/getmoviesbyimdbid")
+    public ArrayList<MovieDb> getAllMoviesByImdbId(@RequestParam List<String> movies){
+        log.info("Getting movies by imdbid");
+
+        ArrayList<MovieDb> response = service.getMoviesByImdbIdList(movies);
+
+        return response;
+    }
+
+    @CrossOrigin("*")
+    @GetMapping("/findMoviesByTerm/{term}")
+    public ArrayList<MovieDb> findMoviesByTerm(@PathVariable String term){
+        log.info("getting movie by term with term: "+term);
+
+        ArrayList<MovieDb> response = service.getMoviesByTerm(term);
+
+        return response;
+    }
+
 }

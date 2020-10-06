@@ -33,6 +33,9 @@ public class Movie implements Serializable {
     @NotNull
     private String release_date;
 
+    @NotNull
+    private String imdb_id;
+
     private String revenue;
 
     @NotNull

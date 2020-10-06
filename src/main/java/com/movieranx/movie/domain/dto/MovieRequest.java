@@ -40,6 +40,8 @@ public class MovieRequest implements Serializable {
     //@NotNull
     private String poster_path;
 
+    private String imdb_id;
+
     //@NotNull
     //private String genres;
 }

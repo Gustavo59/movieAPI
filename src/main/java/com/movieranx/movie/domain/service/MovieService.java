@@ -17,7 +17,7 @@ public class MovieService {
     @Autowired
     MovieRepository movieRepository;
     public Movie findMovieById(String id){
-        Movie movie = null;
+        Movie movie;
 
         try{
             movie = movieRepository.getMovieById(id);
@@ -31,7 +31,7 @@ public class MovieService {
     }
 
     public ArrayList<Movie> findMovieByName(String name) {
-        ArrayList<Movie> movies = null;
+        ArrayList<Movie> movies;
 
         try{
             LinkedHashMap Movies = movieRepository.getMovieByName(name);
@@ -72,5 +72,32 @@ public class MovieService {
         }
 
         return movies;
+    }
+
+    public ArrayList<MovieDb> getMoviesByImdbIdList(List<String> moviesId){
+        ArrayList<MovieDb> movies;
+
+        try{
+            movies = movieRepository.getMoviesByImdbIdList(moviesId);
+        }catch (Exception e){
+            log.error("Could not retrive movie list");
+            log.error(e.getMessage());
+            throw e;
+        }
+
+        return movies;
+    }
+
+    public ArrayList<MovieDb> getMoviesByTerm(String term) {
+        ArrayList<MovieDb> movies;
+
+        try {
+            movies = movieRepository.getMoviesByTerm(term);
+        }catch (Exception e){
+        log.error("Could not retrive movie list");
+        log.error(e.getMessage());
+        throw e;
+    }
+    return movies;
     }
 }

@@ -73,8 +73,8 @@ public class MovieController {
     }
 
     @CrossOrigin("*")
-    @GetMapping("/getwatchedmovies")
-    public ArrayList<MovieDb> getAllWatchedMovies(@RequestParam List<String> movies){
+    @GetMapping("/getmoviesbyid")
+    public ArrayList<MovieDb> getAllMoviesById(@RequestParam List<String> movies){
         log.info("Getting movies");
 
         ArrayList<MovieDb> response = service.getMoviesByIdList(movies);
